@@ -1,0 +1,16 @@
+{
+  "name": "bet-checker",
+  "version": "1.0.0",
+  "description": "Get Wplay.co data ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26"
+  }
+}
