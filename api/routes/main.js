@@ -10,6 +10,6 @@ module.exports = function(app) {
 
     const wPlay = require('../controllers/wplay');
 
-    app.route('/')
+    app.route('/wplay')
     .get(wPlay.find);
 }
