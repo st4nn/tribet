@@ -87,7 +87,7 @@ const onEventFound = (obj, increment)=>{
       
       //Execute the increment function to add this result to the final results array.
       increment({
-        ligue : row.ChampName,
+        league : row.ChampName,
         match : row.Name,
         currentScore : row.LiveScore,
         time : row.LiveCurrentTime,

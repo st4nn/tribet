@@ -43,7 +43,7 @@ if there isn't troubles, it will returns a json array, Where each element will h
 
 |Parameter  |Type   |Description    |Example    |
 |-----------|:-----:|---------------|----------:|
-|ligue      |String |Name of the ligue that contain the match|UEFA Champios Leage   |
+|league      |String |Name of the league that contain the match|UEFA Champios League   |
 |match      |String |Names of the two teams of the match | AC Cesena vs. AC Milán   |
 |currentScore   |String   |Match Score  |2:1    |
 |time   |String |Time elapsed of the match  |83'  |
