@@ -1,6 +1,7 @@
 const 
   axios = require("axios"),
-  moment = require("moment-timezone");
+  moment = require("moment-timezone"),
+  merger = require("../all/merge");
 
 //Url to get the raw bet data.
 const urlBase = 'https://sb1capi-altenar.biahosted.com/Sportsbook/GetLiveEvents?timezoneOffset=300&langId=4&skinName=wplay&configId=1&culture=es&countryCode=CO&sportids=1&withLive=true&filterSingleNodes=2&group=Championship&period=periodall&outrightsDisplay=None';
@@ -8,7 +9,7 @@ const urlBase = 'https://sb1capi-altenar.biahosted.com/Sportsbook/GetLiveEvents?
 /**
  * This Function starts the process and return a Promise for processing into a HTTP Request. Is the main function into the file.
  */
-exports.find = ()=>{
+exports.find = ({forAll = false, prevArr = {}})=>{
   const currentDate = moment().add(-1, 'hours').utc().format('YYYY-MM-DDTHH:mm:00.000[Z]');
   const url = `${urlBase}&startDate=${currentDate}&endDate=${currentDate}`;
 
@@ -32,7 +33,12 @@ exports.find = ()=>{
       lookForEvents(Result, 'Events', onEventFound, incrementCounter);
       
       //Finishes the promise and returns the array result
-      resolve(_data);
+      if (forAll){
+        prevArr = merger.merge(_data, prevArr, "wplay");
+        resolve(prevArr);
+      } else{
+        resolve(_data);
+      }
     })
     .catch(err=>{
       console.error(err);
@@ -85,13 +91,19 @@ const onEventFound = (obj, increment)=>{
         }
       }
       
+      let _time = row.LiveCurrentTime.replace(/'/gi, '');
+      if (!isNaN(_time)){
+        _time = parseInt(_time, 10);
+      } 
+      
       //Execute the increment function to add this result to the final results array.
       increment({
         league : row.ChampName,
         match : row.Name,
         currentScore : row.LiveScore,
-        time : row.LiveCurrentTime,
-        choices: _choices
+        time : _time, 
+        choices: _choices,
+        StatisticsId : row.ExtId
       });
     });
   });

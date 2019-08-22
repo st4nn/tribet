@@ -9,8 +9,12 @@ module.exports = function(app) {
     });
 
     const 
+        all = require('../controllers/all'),
         codere = require('../controllers/codere'),
         wPlay = require('../controllers/wplay');
+
+    app.route('/')
+    .get(all.find);
 
     app.route('/wplay')
     .get(wPlay.find);

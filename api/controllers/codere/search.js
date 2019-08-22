@@ -1,6 +1,6 @@
 const 
   axios = require("axios"),
-  moment = require("moment-timezone");
+  merger = require("../all/merge");
 
 const urlBase = 'https://m.codere.com.co/csbgonline/NoSessionTimeout/GetHomeLiveEvents?languageCode=es-co&includeLiveCount=true';
 
@@ -26,7 +26,7 @@ exports.find = ({forAll = false, prevArr = {}})=>{
                         league: _event.LeagueName,
                         match : `${liveData.ParticipantHome} vs. ${liveData.ParticipantAway}`,
                         currentScore: `${liveData.ResultHome}:${liveData.ResultHome}`,
-                        time: liveData.MatchTime + "'",
+                        time: liveData.MatchTime,
                         choices : [],
                         StatisticsId : _event.StatisticsId
                     });
@@ -44,18 +44,12 @@ exports.find = ({forAll = false, prevArr = {}})=>{
                 }
 
                 if (forAll){
-                    _ans.forEach((row)=>{
-                        if (prevArr[row.StatisticsId] === undefined){
-                            prevArr[row.StatisticsId] = {};
-                        }
-
-                        prevArr[row.StatisticsId] = {...prevArr[row.StatisticsId], codere : {...row}};
-                    });
+                    prevArr = merger.merge(_ans, prevArr, "codere");
                     resolve(prevArr);
                 } else{
                     resolve(_ans);
                 }
-                
+
             } catch (error) {
                 reject("NO DATA");
             }

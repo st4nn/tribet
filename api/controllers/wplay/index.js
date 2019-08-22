@@ -1,9 +1,9 @@
 'use strict';
 
-const wplay_finder = require("./search");
+const _finder = require("./search");
 
 exports.find = function(req, res) {
-    wplay_finder.find()
+    _finder.find({})
     .then((data)=>{
         res.send(data)
     })
