@@ -11,6 +11,7 @@ module.exports = function(app) {
     const 
         all = require('../controllers/all'),
         codere = require('../controllers/codere'),
+        betplay = require('../controllers/betplay'),
         wPlay = require('../controllers/wplay');
 
     app.route('/')
@@ -21,4 +22,7 @@ module.exports = function(app) {
 
     app.route('/codere')
     .get(codere.find);
+
+    app.route('/betplay')
+    .get(betplay.find);
 }
