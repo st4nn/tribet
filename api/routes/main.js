@@ -8,8 +8,13 @@ module.exports = function(app) {
         next();
     });
 
-    const wPlay = require('../controllers/wplay');
+    const 
+        codere = require('../controllers/codere'),
+        wPlay = require('../controllers/wplay');
 
     app.route('/wplay')
     .get(wPlay.find);
+
+    app.route('/codere')
+    .get(codere.find);
 }
