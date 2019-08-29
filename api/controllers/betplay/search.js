@@ -26,16 +26,14 @@ exports.find = ({forAll = false, prevArr = {}})=>{
 
                     try {
                         if (event.sport === 'FOOTBALL'){
-                            console.log("-------------------------------------------------");
-                            console.log(event);
-                            console.log("-------------------------------------------------");
-
                             _ans.push({
                                 league: event.group,
                                 match : event.name.replace(/ - /gi, " vs. "),
                                 currentScore: `${score.home}:${score.away}`,
                                 time: matchClock.minute,
                                 StatisticsId : event.id,
+                                iso : '',
+                                CategoryName : '',
                                 choices : []
                             });
                             

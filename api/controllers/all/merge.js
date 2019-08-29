@@ -7,9 +7,11 @@ exports.merge = (arr, prevArr, page)=>{
                prevArr[row.StatisticsId] = { choices : [] };
             }
 
-            const _choices = prevArr[row.StatisticsId].choices;
+            const 
+                _choices = prevArr[row.StatisticsId].choices,
+                {iso, CategoryName} = row;
+
             _choices.push({page : page, time : row.time, odds : {...row.choices}});
-     
      
             prevArr[row.StatisticsId] = {
                league : row.league,
@@ -17,6 +19,8 @@ exports.merge = (arr, prevArr, page)=>{
                currentScore : row.currentScore,
                time : row.time,
                StatisticsId : row.StatisticsId,
+               iso : iso,
+               CategoryName : CategoryName,
                choices : _choices
              };
             
@@ -34,9 +38,13 @@ exports.mergeByName = (arr, prevArr, page)=>{
             for (var index in prevArr){
                 if (row.match.toLowerCase().trim() === prevArr[index].match.toLowerCase().trim()){
                     found = true;
-                    const _choices = prevArr[index].choices || [];
+                    const 
+                        _choices = prevArr[index].choices || [],
+                        {iso, CategoryName} = prevArr[index];
                     _choices.push({page : page, time : row.time, odds : {...row.choices}});
 
+                    prevArr[index].iso = iso;
+                    prevArr[index].CategoryName = CategoryName;
                     prevArr[index].choices = _choices
                 }
             }
@@ -53,6 +61,8 @@ exports.mergeByName = (arr, prevArr, page)=>{
                     currentScore : row.currentScore,
                     time : row.time,
                     StatisticsId : myIndex,
+                    iso : row.iso,
+                    CategoryName : row.CategoryName,
                     choices : [{page : page, time : row.time, odds : {...row.choices}}]
                 };
             }
