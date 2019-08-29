@@ -103,7 +103,9 @@ const onEventFound = (obj, increment)=>{
         currentScore : row.LiveScore,
         time : _time, 
         choices: _choices,
-        StatisticsId : row.ExtId
+        StatisticsId : row.ExtId,
+        iso : row.ISO,
+        CategoryName : row.CategoryName
       });
     });
   });

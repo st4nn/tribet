@@ -28,7 +28,9 @@ exports.find = ({forAll = false, prevArr = {}})=>{
                         currentScore: `${liveData.ResultHome}:${liveData.ResultHome}`,
                         time: liveData.MatchTime,
                         choices : [],
-                        StatisticsId : _event.StatisticsId
+                        StatisticsId : _event.StatisticsId,
+                        iso : '',
+                        CategoryName : _event.CountryName
                     });
 
                     const 

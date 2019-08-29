@@ -12,7 +12,13 @@ const
             .then((codereAns)=>{
                 _betplay.find({forAll : true, prevArr : codereAns})
                 .then((ans)=>{
-                    res.send(ans);
+                    const answer = [];
+                    
+                    for (var index in ans){
+                        answer.push(ans[index]);
+                    }
+
+                    res.send(answer);
                 })
                 .catch(()=>{
                     res.sendStatus(500);

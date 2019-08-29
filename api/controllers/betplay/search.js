@@ -22,15 +22,19 @@ exports.find = ({forAll = false, prevArr = {}})=>{
                 events.forEach((row)=>{
                     const 
                         {event = {}, liveData = {}, betOffers = [{outcomes : []}]} = row,
-                        {score = {}} = liveData;
+                        {score = {}, matchClock={}} = liveData;
 
                     try {
                         if (event.sport === 'FOOTBALL'){
+                            console.log("-------------------------------------------------");
+                            console.log(event);
+                            console.log("-------------------------------------------------");
+
                             _ans.push({
                                 league: event.group,
                                 match : event.name.replace(/ - /gi, " vs. "),
                                 currentScore: `${score.home}:${score.away}`,
-                                time: liveData.matchClock.minute,
+                                time: matchClock.minute,
                                 StatisticsId : event.id,
                                 choices : []
                             });
